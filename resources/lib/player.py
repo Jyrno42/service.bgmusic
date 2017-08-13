@@ -14,7 +14,7 @@ class PlayerMonitor(xbmc.Player):
 
         super(PlayerMonitor, self).__init__(*args, **kwargs)
 
-    def attach(self, addon, monitor)
+    def attach(self, addon, monitor):
         self.addon = addon
         self.monitor = monitor
 
