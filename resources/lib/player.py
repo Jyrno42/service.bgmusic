@@ -4,13 +4,19 @@ import xbmc
 
 
 class PlayerMonitor(xbmc.Player):
-    def __init__(self, addon, monitor, *args, **kwargs):
-        self.monitor = monitor
-        self.addon = addon
+    def __init__(self, *args, **kwargs):
+        self.monitor = None
+        self.addon = None
 
         # Statemachine
         self.is_idle = False
         self.last_stopped = datetime.datetime.now()
+
+        super(PlayerMonitor, self).__init__(*args, **kwargs)
+
+    def attach(self, addon, monitor)
+        self.addon = addon
+        self.monitor = monitor
 
     @property
     def playlist(self):
