@@ -5,7 +5,6 @@ import xbmc
 
 class PlayerMonitor(xbmc.Player):
     def __init__(self, *args, **kwargs):
-        self.monitor = None
         self.addon = None
 
         # Statemachine
@@ -14,9 +13,8 @@ class PlayerMonitor(xbmc.Player):
 
         super(PlayerMonitor, self).__init__(*args, **kwargs)
 
-    def attach(self, addon, monitor):
+    def attach(self, addon):
         self.addon = addon
-        self.monitor = monitor
 
     @property
     def playlist(self):
@@ -62,7 +60,7 @@ class PlayerMonitor(xbmc.Player):
         if self.check_conditions():
             self.is_idle = True
 
-            self.monitor.play(self.playlist)
+            self.play(self.playlist)
             
     def check_conditions(self):
         curr_time = datetime.datetime.now()
