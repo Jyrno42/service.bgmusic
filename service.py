@@ -17,7 +17,7 @@ TICK_TIME = 10  # seconds
 if __name__ == '__main__':
     monitor = xbmc.Monitor()
     player_monitor = PlayerMonitor()
-    player_monitor.attach(__addon__, monitor)
+    player_monitor.attach(__addon__)
 
     while not monitor.abortRequested():
         player_monitor.tick()
