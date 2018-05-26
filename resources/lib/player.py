@@ -67,7 +67,9 @@ class PlayerMonitor(xbmc.Player):
                 xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Input.Select","id":1}')
                 self.wait_for_play = 2
             elif self.wait_for_play == 2:
-                xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Input.ExecuteAction","id":2,"params":{"action":"skipnext"}}')
+                xbmc.executebuiltin("PlayerControl(RandomOn)")
+                xbmc.executebuiltin("PlayerControl(RepeatAll)")
+                xbmc.executebuiltin("PlayerControl(Next)")
                 self.wait_for_play = False
 
         if self.check_conditions():
