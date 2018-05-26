@@ -21,6 +21,10 @@ class PlayerMonitor(xbmc.Player):
         return self.addon.getSetting('playlist')
 
     @property
+    def favorite(self):
+        return xbmc.getInfoLabel('Skin.String(Startup.Favourites.Path)')
+
+    @property
     def threshold(self):
         return int(float(self.addon.getSetting('threshold')))
 
@@ -60,7 +64,15 @@ class PlayerMonitor(xbmc.Player):
         if self.check_conditions():
             self.is_idle = True
 
+            self.trigger()
+
+
+    def trigger(self):
+        if self.favorite:
+            xbmc.executebuiltin(self.favorite)
+        else:
             self.play(self.playlist)
+
             
     def check_conditions(self):
         curr_time = datetime.datetime.now()
