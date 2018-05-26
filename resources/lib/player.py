@@ -63,8 +63,11 @@ class PlayerMonitor(xbmc.Player):
 
     def tick(self):
         if self.wait_for_play:
-            if datetime.datetime.now() - self.wait_for_play > datetime.timedelta(seconds=10):
+            if self.wait_for_play == 1:
                 xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Input.Select","id":1}')
+                self.wait_for_play = 2
+            elif self.wait_for_play == 2:
+                xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Player.GoTo","id":2,"params":{"playerid":1,"to":"next"}}')
                 self.wait_for_play = False
 
         if self.check_conditions():
@@ -76,7 +79,7 @@ class PlayerMonitor(xbmc.Player):
     def trigger(self):
         if self.favorite:
             xbmc.executebuiltin(self.favorite)
-            self.wait_for_play = datetime.datetime.now()
+            self.wait_for_play = 1
 
         else:
             self.play(self.playlist)
