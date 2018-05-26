@@ -8,6 +8,7 @@ class PlayerMonitor(xbmc.Player):
         self.addon = None
 
         # Statemachine
+        self.wait_for_play = False
         self.is_idle = False
         self.last_stopped = datetime.datetime.now()
 
@@ -61,6 +62,11 @@ class PlayerMonitor(xbmc.Player):
         return False
 
     def tick(self):
+        if self.wait_for_play:
+            if datetime.datetime.now() - self.wait_for_play > datetime.timedelta(seconds=10):
+                xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Input.Select","id":1}')
+                self.wait_for_play = False
+
         if self.check_conditions():
             self.is_idle = True
 
@@ -70,6 +76,8 @@ class PlayerMonitor(xbmc.Player):
     def trigger(self):
         if self.favorite:
             xbmc.executebuiltin(self.favorite)
+            self.wait_for_play = datetime.datetime.now()
+
         else:
             self.play(self.playlist)
 
