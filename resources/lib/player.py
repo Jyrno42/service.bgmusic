@@ -64,7 +64,8 @@ class PlayerMonitor(xbmc.Player):
     def tick(self):
         if self.wait_for_play:
             if self.wait_for_play == 1:
-                xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Input.Select","id":1}')
+                xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Input.Down","id":1}')
+                xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Input.Select","id":2}')
                 self.wait_for_play = 2
             elif self.wait_for_play == 2:
                 xbmc.executebuiltin("PlayerControl(RandomOn)")
