@@ -4,7 +4,7 @@
         <setting label="32001" type="file"     id="playlist"    default=""    source="special://musicplaylists"/>
 		<setting type="action" label="32012" action="RunScript(script.favourites,property=Startup.Favourites)"/>
         <setting label="32013" id="favorite-path" default="" 
-                 type="text" label="$INFO[Skin.String(Startup.Favourites.Label)]" value="$INFO[Skin.String(Startup.Favourites.Path)]" 
+                 type="text" label="$INFO[Skin.String(Startup.Favourites.Label)]" value="$INFO[Skin.String(Startup.Favourites.Path)]" />
         <setting label="32002" type="slider" id="threshold" default="20" range="0,60"   option="int"/>
         <!--<setting label="32003" type="slider" id="volume"    default="20" range="1,100" option="int" />-->
         <!--<setting label="32011" type="bool" id="rem_volume_changes" default="true"/>-->
